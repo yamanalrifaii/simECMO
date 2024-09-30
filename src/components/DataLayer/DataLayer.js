@@ -1,172 +1,98 @@
-// import React, { useState } from 'react';
-// import '../../css/DataLayer.css';
-// import { Box, useColorModeValue } from '@chakra-ui/react';
+import React, { useState } from "react";
+import { InputNumber } from "primereact/inputnumber";
+import 'primereact/resources/themes/saga-blue/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+import '../../css/DataLayer.css';
 
+function DataLayer() {
+    const [values, setValues] = useState({
+        sweep: 5,
+        FDO2: 0.21,
+        shunt_fraction: 20,
+        DLCO: 20,
+        FIO2: 0.21,
+        Resp_Rate: 12,
+        TV: 500,
+        MVO2: 250,
+        Hb: 12,
+        Lactate: 1,
+        HCO3: 24,
+        LV_Contractility: 1,
+        RV_Contractility: 1,
+        SVR: 20,
+        PVR: 1,
+        Volume: 5000,
+        HR: 70
+    });
 
-// function DataLayer() {
-//   const bgColor = useColorModeValue('gray.100', 'gray.800');  // Light and dark mode backgrounds
-//   const [data, setData] = useState({
-//     ph: '7.36',
-//     hct: '45.0',
-//     pco2: '1.2',
-//     hgb: '15',
-//     po2: '3.4',
-//     svo2: '78%',
-//     hco3: '5.6',
-//     be: '-3.0',
-//     temp_cdi: '37.0',
-//     sao2: '100%',
-//     temp_physio: '37.0',
-//     rr: '12',
-//     hr: '140',
-//     o2sat: '99%',
-//     bp: '58/40',
-//     cvp: '10',
-//     pip: '25',
-//     fio2: '30%',
-//     peep: '10',
-//     map: '15',
-//     rate: '12',
-//     spo2: '97%',
-//   });
+    const parameterConfig = {
+        sweep: { min: 0, max: 10, step: 0.5 },
+        FDO2: { min: 0.05, max: 1.00, step: 0.05 },
+        shunt_fraction: { min: 0, max: 100, step: 1 },
+        DLCO: { min: 1, max: 100, step: 1 },
+        FIO2: { min: 0.05, max: 1, step: 0.01 },
+        Resp_Rate: { min: 0, max: 30, step: 1 },
+        TV: { min: 0, max: 1000, step: 10 },
+        MVO2: { min: 100, max: 1500, step: 5 },
+        Hb: { min: 5, max: 20, step: 0.5 },
+        Lactate: { min: 0, max: 15, step: 0.5 },
+        HCO3: { min: 10, max: 40, step: 0.5 },
+        LV_Contractility: { min: 0.20, max: 10.00, step: 0.1 },
+        RV_Contractility: { min: 0.04, max: 5.00, step: 0.1 },
+        SVR: { min: 0, max: 100, step: 0.10 },
+        PVR: { min: 0, max: 80, step: 0.10 },
+        Volume: { min: 200, max: 5000, step: 20 },
+        HR: { min: 40, max: 210, step: 1 }
+    };
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
+    const handleChange = (key, newValue) => {
+        setValues(prev => ({ ...prev, [key]: newValue }));
+    };
 
-//   const handleFileUpload = (event) => {
-//     const file = event.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onload = (e) => {
-//         const text = e.target.result;
-//         const parsedData = parseCSV(text);
-//         setData(parsedData);
-//       };
-//       reader.readAsText(file);
-//     }
-//   };
+    const renderParameter = (key, value) => (
+        <div key={key} className="flex justify-between items-center p-2 border-b border-gray-200">
+            <span className="text-sm font-medium text-gray-700 mr-2">
+                {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+            </span>
+            <InputNumber
+                value={value}
+                onValueChange={(e) => handleChange(key, e.value)}
+                mode="decimal"
+                showButtons
+                buttonLayout="horizontal"
+                decrementButtonClassName="p-button-danger"
+                incrementButtonClassName="p-button-danger"
+                incrementButtonContent="+"
+                decrementButtonContent="-"
+                min={parameterConfig[key].min}
+                max={parameterConfig[key].max}
+                step={parameterConfig[key].step}
+                className="custom-inputnumber"
+            />
+        </div>
+    );
 
-//   const parseCSV = (text) => {
-//     const lines = text.split('\n');
-//     const parsedData = {};
-//     lines.forEach((line) => {
-//       const [key, value] = line.split(',');
-//       parsedData[key.trim()] = value.trim();
-//     });
-//     return parsedData;
-//   };
+    const renderParameterGroup = (title, parameters) => (
+        <div className="mb-4 bg-gray-700 rounded overflow-hidden">
+            <h3 className="text-white text-sm font-semibold p-2">{title}</h3>
+            <div className="bg-white max-h-60 overflow-y-auto">
+                {parameters.map(param => renderParameter(param, values[param]))}
+            </div>
+        </div>
+    );
 
-//   return (
-//     <div className="data-layer">
-//       <h1>Data Layer</h1>
-//       <div className="data-table">
-//         <div className="component">
-//           <div className="monitor-table">
-//             <h2>CDI Monitor</h2>
-//             <table>
-//               <tbody>
-//                 <tr>
-//                   <td>pH</td>
-//                   <td><input type="text" value={data.ph} name="ph" onChange={handleChange} /></td>
-//                   <td>HCT</td>
-//                   <td><input type="text" value={data.hct} name="hct" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>pCO2</td>
-//                   <td><input type="text" value={data.pco2} name="pco2" onChange={handleChange} /></td>
-//                   <td>Hgb</td>
-//                   <td><input type="text" value={data.hgb} name="hgb" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>pO2</td>
-//                   <td><input type="text" value={data.po2} name="po2" onChange={handleChange} /></td>
-//                   <td>SvO2</td>
-//                   <td><input type="text" value={data.svo2} name="svo2" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>HCO3</td>
-//                   <td><input type="text" value={data.hco3} name="hco3" onChange={handleChange} /></td>
-//                   <td>BE</td>
-//                   <td><input type="text" value={data.be} name="be" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>Temp</td>
-//                   <td><input type="text" value={data.temp_cdi} name="temp_cdi" onChange={handleChange} /></td>
-//                   <td>SaO2</td>
-//                   <td><input type="text" value={data.sao2} name="sao2" onChange={handleChange} /></td>
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//         {/* Repeat for Physiological Monitor and Ventilator Tables */}
-//         <div className="component">
-//           <div className="phys-table">
-//             <h2>Physiological Monitor</h2>
-//             <table>
-//               <tbody>
-//                 <tr>
-//                   <td>Temp</td>
-//                   <td><input type="text" value={data.temp_physio} name="temp_physio" onChange={handleChange} /></td>
-//                   <td>RR</td>
-//                   <td><input type="text" value={data.rr} name="rr" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>HR</td>
-//                   <td><input type="text" value={data.hr} name="hr" onChange={handleChange} /></td>
-//                   <td>O2 Sat</td>
-//                   <td><input type="text" value={data.o2sat} name="o2sat" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>BP</td>
-//                   <td><input type="text" value={data.bp} name="bp" onChange={handleChange} /></td>
-//                   <td>CVP</td>
-//                   <td><input type="text" value={data.cvp} name="cvp" onChange={handleChange} /></td>
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//         <div className="component">
-//           <div className="vent-table">
-//             <h2>Ventilator</h2>
-//             <table>
-//               <tbody>
-//                 <tr>
-//                   <td>PIP</td>
-//                   <td><input type="text" value={data.pip} name="pip" onChange={handleChange} /></td>
-//                   <td>FiO2</td>
-//                   <td><input type="text" value={data.fio2} name="fio2" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>PEEP</td>
-//                   <td><input type="text" value={data.peep} name="peep" onChange={handleChange} /></td>
-//                   <td>MAP</td>
-//                   <td><input type="text" value={data.map} name="map" onChange={handleChange} /></td>
-//                 </tr>
-//                 <tr>
-//                   <td>Rate</td>
-//                   <td><input type="text" value={data.rate} name="rate" onChange={handleChange} /></td>
-//                   <td>SpO2</td>
-//                   <td><input type="text" value={data.spo2} name="spo2" onChange={handleChange} /></td>
-//                 </tr>
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//         <div className="component upload-section">
-//           <input type="file" id="fileInput" accept=".csv" style={{ display: 'none' }} onChange={handleFileUpload} />
-//           <button id="uploadButton" onClick={() => document.getElementById('fileInput').click()}>Upload Data File</button>
-//         </div>
-//       </div>
-//     </div>
-    
-//   );
-// }
+    const lungsParameters = ['sweep', 'FDO2', 'shunt_fraction', 'DLCO', 'FIO2', 'Resp_Rate', 'TV'];
+    const patientParameters = ['MVO2', 'Hb', 'Lactate', 'HCO3', 'LV_Contractility', 'RV_Contractility', 'SVR', 'PVR', 'Volume', 'HR'];
 
-// export default DataLayer;
+    return (
+        <div className="flex flex-col space-y-4 p-4 rounded-lg overflow-hidden">
+            <div className="overflow-y-auto flex-grow">
+                {renderParameterGroup("Lungs Parameters", lungsParameters)}
+                {renderParameterGroup("Patient Parameters", patientParameters)}
+            </div>
+        </div>
+    );
+}
+
+export default DataLayer;

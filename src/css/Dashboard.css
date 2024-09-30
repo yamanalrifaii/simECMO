@@ -1,0 +1,9 @@
+/* Custom Slider Styles */
+.p-slider .p-slider-range {
+    background-color: #991b1b
+}
+
+.p-slider .p-slider-handle {
+    background-color: #991b1b; 
+    border-color: #991b1b 
+}

@@ -1,106 +1,126 @@
-.data-layer {
-  padding: 10px;
-  text-align: center;
+DataLayer.css
+.p-slider .p-slider-handle {
+  background: #991b1b;
+  border: 2px solid #991b1b;
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-top: -0.375rem;
 }
 
-.data-layer h1 {
-  font-size: 24px; /* Adjusted size */
-  margin-bottom: 10px; /* Reduced bottom margin */
-  margin-top: 0; /* Remove top margin to reduce space */
+.p-slider .p-slider-range {
+  background: #991b1b;
 }
 
-.data-table {
-  margin-top: 0; /* Reduced top margin to bring the table closer to the title */
-  text-align: left;
+.p-inputtext {
+  padding: 0.25rem;
+  font-size: 0.875rem;
 }
 
-.component {
-  margin-bottom: 10px; /* Adjusted space between tables */
-  background-color: #f9f9f9;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.p-slider {
+  height: 0.25rem;
 }
 
-.monitor-table h2, .phys-table h2, .vent-table h2 {
-  background-color: #C2D9FF;
-  padding: 8px;
-  margin: 0;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 8px 8px 0 0;
+.p-slider .p-slider-handle:hover {
+  background: #ff3333;
+  border-color: #ff3333;
 }
 
-table {
+.p-slider-handle {
+  background: #991b1b;
+  width: 15px;  /* Smaller width */
+  height: 15px; /* Smaller height */
+  border-radius: 50%; /* Keeps it circular, adjust if necessary */
+}
+
+.DataLayer {
+  /* Adjust width, margin, padding, etc., here to fit content */
   width: 100%;
-  border-collapse: collapse;
+  box-sizing: border-box; /* Include padding and border in the width */
 }
 
-td {
-  padding: 6px;
-  font-weight: normal;
+input, .p-slider {
+  width: 100%; /* Ensure slider and input text use up only available space */
+  box-sizing: border-box;
+}
+
+/* Reduce overall size and spacing */
+.DataLayer h1, .DataLayer label, .DataLayer .p-slider {
+  margin-bottom: 8px; /* Smaller bottom margin */
+}
+.custom-inputnumber {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  overflow: hidden;
+  width: 100px;
+}
+
+.custom-inputnumber .p-inputnumber-input {
+  flex-grow: 1;
   text-align: center;
+  border: none;
+  background-color: transparent;
   font-size: 14px;
-  border-right: 1px solid transparent; /* This ensures full width without cutting lines */
+  padding: 0 5px;
+  height: 100%;
 }
 
-td:not(:last-child) {
-  border-bottom: 1px solid #ccc;
-}
-
-td:last-child {
-  border-right: none;
-}
-
-.component table tbody tr:last-child td {
-  border-bottom: none; /* Remove border under the last row */
-}
-
-
-td:last-child {
-  border-bottom: none; /* Remove the border from the last row */
-}
-
-input[type="text"] {
-  width: 50px; /* Reduce width of input fields */
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.upload-section {
-  text-align: center;
-  margin-top: 0; 
+.custom-inputnumber .p-inputnumber-button {
+  width: 20px;
+  height: 24px;
   padding: 0;
-  background: transparent; /* Ensure there's no background */
-  box-shadow: none; /* Remove any shadow */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.component.upload-section {
-  background: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
+.custom-inputnumber .p-inputnumber-button.p-button.p-button-danger {
+  border: none;
+  color: #991b1b;
+  background-color: transparent;
 }
 
-
-.upload-section button {
-  padding: 10px 20px;
-  border: 2px solid #97F8CD;
-  border-radius: 50px;
-  cursor: pointer;
-  font-size: 16px;
-  color: #97F8CD;
-  text-transform: uppercase;
-  background: #82e0aa;
-  box-shadow: none;
-  margin-top: 10px; /* Adjusted to make sure it stays within the data layer */
+.custom-inputnumber .p-inputnumber-button .p-button-label {
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.upload-section button:hover {
-  background-color: #82e0aa;
-  color: white;
+.custom-inputnumber .p-inputtext {
+  width: calc(100% - 40px);
+  min-width: 30px;
+}
+
+/* Additional styles for the new layout */
+.bg-gray-700 {
+  background-color: #374151;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+/* Ensure scrollbars are visible on WebKit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

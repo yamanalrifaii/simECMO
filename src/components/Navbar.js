@@ -1,83 +1,49 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Button, Box, Menu, MenuItem } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import logo from '../images/logo.svg';
+import React from 'react';
+import logo from '../images/logo.svg'; 
 
-function Navbar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [menuType, setMenuType] = React.useState(null);
-
-  const handleMenuOpen = (event, type) => {
-    setAnchorEl(event.currentTarget);
-    setMenuType(type);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    setMenuType(null);
-  };
-
+const NavBar = () => {
   return (
-    <>
-      <AppBar position="static" color="transparent">
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box
-              component="img"
-              sx={{
-                height: 40,
-                marginRight: 2,
-              }}
-              alt="ECMO Logo"
-              src={logo}
-            />
-            <Box sx={{ display: 'flex' }}>
-              <Button
-                color="inherit"
-                endIcon={<KeyboardArrowDownIcon />}
-                onClick={(e) => handleMenuOpen(e, 'product')}
-              >
-                Product
-              </Button>
-              <Button color="inherit">Features</Button>
-              <Button color="inherit">Marketplace</Button>
-              <Button
-                color="inherit"
-                endIcon={<KeyboardArrowDownIcon />}
-                onClick={(e) => handleMenuOpen(e, 'company')}
-              >
-                Company
-              </Button>
-            </Box>
-          </Box>
-          <Button variant="outlined" color="primary">
-            Log in
-          </Button>
-        </Toolbar>
-      </AppBar>
+    <nav className="bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex">
+            <div className="flex-shrink-0 flex items-center">
+              <img src={logo} alt="Logo" width="50" height="50"/>
+              {/* <svg className="h-8 w-8 text-red" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 8V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 12H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg> */}
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <a href="#" className="border-red text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Dashboard
+              </a>
+              <a href="#" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Scenarios
+              </a>
+              <a href="#" className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                Simulations
+              </a>
+            </div>
+          </div>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <button type="button" className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red">
+              <span className="sr-only">View notifications</span>
+            </button>
 
-      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-        {menuType === 'product' && (
-          <Box sx={{ p: 2, width: 300 }}>
-            <MenuItem onClick={handleMenuClose}>
-              <Box>
-                <Box sx={{ fontWeight: 'bold' }}>Analytics</Box>
-                <Box sx={{ fontSize: '0.875rem', color: 'text.secondary' }}>
-                  Get a better understanding of your traffic
-                </Box>
-              </Box>
-            </MenuItem>
-          </Box>
-        )}
-        {menuType === 'company' && (
-          <Box sx={{ p: 2, width: 300 }}>
-            <MenuItem onClick={handleMenuClose}>About</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Careers</MenuItem>
-          </Box>
-        )}
-      </Menu>
-    </>
+            <div className="ml-3 relative">
+              <div>
+                <button type="button" className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-reds" id="user-menu" aria-expanded="false" aria-haspopup="true">
+                  <span className="sr-only">Open user menu</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
   );
-}
+};
 
-export default Navbar;
+export default NavBar;

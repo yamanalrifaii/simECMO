@@ -1,0 +1,29 @@
+.pump-controls {
+    background-color: #1F2C5B;
+    padding: 20px;
+    border-radius: 15px;
+    width: 180px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pump-controls h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.knob-container {
+    position: relative;
+}
+
+.knob-value {
+    font-size: 40px;
+    color: white;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 5px;
+    display: inline-block;
+}

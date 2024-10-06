@@ -1,0 +1,95 @@
+.pressure-monitor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, #c2c2c2, #e8e8e8);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 180px;
+}
+
+.pressure-display {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background: linear-gradient(145deg, #9b9b9b, #ffffff);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: inset 3px 3px 8px #6b6b6b, inset -3px -3px 8px #ffffff;
+  width: 100%;
+}
+
+.label {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.led-indicator {
+  width: 12px;
+  height: 12px;
+  background-color: #00ff00;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px #00ff00;
+  margin-right: 10px;
+}
+
+.value {
+  font-size: 24px;
+  color: #003300;
+  background: #d8f5d8;
+  padding: 5px 8px;
+  border-radius: 5px;
+  flex-grow: 1;
+  text-align: center;
+  text-align: right;
+  position: relative;
+  min-width: 60px;  /* Ensure the box is wide enough for content */
+  min-height: 0px; 
+}
+
+.value sup {
+  position: absolute;
+  top: -2px;  /* Adjust to move inside the box */
+  right: 5px;
+  font-size: 12px;
+  vertical-align: middle;
+  color: #333;
+}
+
+.value sub {
+  position: absolute;
+  bottom: -5px;  /* Adjust to move inside the box */
+  right: 5px;
+  font-size: 12px;
+  vertical-align: middle;
+  color: #333;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;  /* Ensure the button groups are in a horizontal line */
+  gap: 10px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column; /* Stack "+" and "-" buttons vertically */
+  gap: 5px; /* Space between the buttons in the group */
+}
+
+.buttons button {
+  background: #e0e0e0;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+}
+
+.buttons button:hover {
+  background: #cccccc;
+}

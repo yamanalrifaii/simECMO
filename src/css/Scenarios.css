@@ -1,0 +1,7 @@
+.custom-stepper .p-stepper-step::before {
+    border-top: 2px solid red !important;
+  }
+  
+  .custom-stepper .p-stepper-step.p-highlight::before {
+    border-top: 2px solid red !important;
+  }
